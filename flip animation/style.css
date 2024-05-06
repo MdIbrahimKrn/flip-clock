@@ -1,0 +1,232 @@
+*{
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+:root{
+    --card-size:4;
+    --border-radius:5px;
+    --font-size:calc(var(--card-size)*.9rem);
+    --transition-duration:.5;
+    --card-color:#fff;
+    --background-color: #999;
+}
+body{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 100vh;
+    background-color:var(--background-color);
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container{
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    gap: 20px;
+    padding: 10px;
+}
+.flip-container .section{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap:10px;
+}
+.flip-container .section span{
+    font-size: calc(var(--card-size)*8px);
+    text-transform: uppercase;
+    color: #111;
+}
+.flip-container .tens{
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    gap:8px;
+  
+}
+.flip-container .tens .flip{
+    color:black;
+    font-size:var(--font-size);
+    line-height: 0;
+    
+}
+
+.flip-container .tens .flip .digit{
+    position: relative;
+    height:calc(var(--card-size)*20px);
+    width:calc((var(--card-size)*20px)*.7);
+    -webkit-perspective: calc(var(--card-size)*50px);
+            perspective: calc(var(--card-size)*50px);
+    border-radius: var(--border-radius);
+   
+}
+.flip-container .tens .flip .digit::before,
+.flip-container .tens .flip .digit::after{
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    background-color:var(--card-color);
+}
+
+.flip-container .tens .flip .digit::before{
+    content:attr(data-digit-before);
+    bottom:0;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    background-color:var(--card-color);
+    border-radius: 0 0 var(--border-radius) var(--border-radius) ;
+
+    
+}
+.flip-container .tens .flip .digit::after{
+    content:attr(data-digit-after);
+    top: 0;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    background-color:var(--card-color);
+    border-radius: var(--border-radius) var(--border-radius) 0 0 ;
+}
+.flip-container .tens .flip .digit .card{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 50%;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    -webkit-transform-origin: bottom;
+        -ms-transform-origin: bottom;
+            transform-origin: bottom;
+    -webkit-transform: rotateX(0);
+            transform: rotateX(0);
+    -webkit-transition: -webkit-transform .5s linear;
+    transition: -webkit-transform .5s linear;
+    -o-transition: transform .5s linear;
+    transition: transform .5s linear;
+    transition: transform .5s linear, -webkit-transform .5s linear;
+}
+.flip-container .tens .flip .digit .card.flipped {
+    -webkit-animation: flipped .5s linear both;
+            animation: flipped .5s linear both;  
+}
+
+@-webkit-keyframes flipped{
+    60%{
+    -webkit-transform: rotateX(-180deg);
+            transform: rotateX(-180deg);
+    }
+    75%{
+    -webkit-transform: rotateX(-150deg);
+            transform: rotateX(-150deg);
+    }
+    100%{
+    -webkit-transform: rotateX(-180deg);
+            transform: rotateX(-180deg);
+
+    }
+}
+
+@keyframes flipped{
+    60%{
+    -webkit-transform: rotateX(-180deg);
+            transform: rotateX(-180deg);
+    }
+    75%{
+    -webkit-transform: rotateX(-150deg);
+            transform: rotateX(-150deg);
+    }
+    100%{
+    -webkit-transform: rotateX(-180deg);
+            transform: rotateX(-180deg);
+
+    }
+}
+.flip-container .tens .flip .digit .card .card-face{
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    background-color:var(--card-color);
+
+}
+.flip-container .tens .flip .digit .card .card-face-front{
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    background-color:var(--card-color);
+    border-radius:var(--border-radius) var(--border-radius) 0 0  ;
+
+   
+}
+.flip-container .tens .flip .digit .card .card-face-back{
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-transform: rotateX(-180deg);
+            transform: rotateX(-180deg);
+    background-color:var(--card-color);
+    border-radius: 0 0 var(--border-radius) var(--border-radius) ;
+
+}
+.hr-line{
+    position:absolute;
+    width: 100%;
+    height: 1px;
+    z-index: 10;
+    color: rgba(17, 17, 17, 0.316);
+}
+.athore{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    text-decoration: none;
+    font-size:.8rem;
+    margin-left: auto;
+}
+
+@media only screen and (max-width: 600px){
+    :root{
+        --card-size:3;
+    }
+    .athore{
+        font-size: .6em;
+    }
+}
